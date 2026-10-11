@@ -1,0 +1,4 @@
+description = "A bug receipt must say how it fails."
+kind = "bug"
+expect = "invalid"
+meaningful = true

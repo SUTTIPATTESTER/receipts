@@ -1,0 +1,108 @@
+name: receipts
+description: Verify a bug report or pull request by running its receipt in a sandbox. Never needs a write token.
+author: receipts contributors
+branding:
+  icon: check-circle
+  color: green
+
+inputs:
+  mode:
+    description: "`pull_request` (fix receipt, compares base and head) or `issue` (bug receipt from the issue body)."
+    required: true
+  repo-path:
+    description: Path of the checked-out repository.
+    default: "."
+  base-ref:
+    description: "Git ref of the base tree. For a pull_request checkout with fetch-depth 2 this is `HEAD^1`; for issues `HEAD`."
+    default: "HEAD^1"
+  head-ref:
+    description: Git ref of the head tree (pull_request mode).
+    default: "HEAD"
+  body-file:
+    description: File containing the issue body (issue mode). Write it from an env var, never from ${{ }} in a script.
+    default: ""
+  sandbox:
+    description: "`docker` (default). `local` is not a security boundary and is refused here."
+    default: "docker"
+  subject:
+    description: "`pull_request:<number>` or `issue:<number>`, recorded in the verdict."
+    required: true
+  artifact-name:
+    description: Name of the uploaded verdict artifact.
+    default: receipts-verdict
+  upload:
+    description: Upload verdict.json as an artifact for the reporter workflow.
+    default: "true"
+
+outputs:
+  verdict:
+    description: The verdict, for example `verified` or `vacuous`.
+    value: ${{ steps.verify.outputs.verdict }}
+  good:
+    description: "`true` for verified/reproduced."
+    value: ${{ steps.verify.outputs.good }}
+  skipped:
+    description: "`true` when an issue had no receipt block (nothing was verified or uploaded)."
+    value: ${{ steps.verify.outputs.skipped }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+      with:
+        python-version: "3.12"
+
+    - name: Verify receipt
+      id: verify
+      shell: bash
+      env:
+        # Everything arrives through env vars: no ${{ }} is ever expanded inside the script.
+        INPUT_MODE: ${{ inputs.mode }}
+        INPUT_REPO: ${{ inputs.repo-path }}
+        INPUT_BASE_REF: ${{ inputs.base-ref }}
+        INPUT_HEAD_REF: ${{ inputs.head-ref }}
+        INPUT_BODY_FILE: ${{ inputs.body-file }}
+        INPUT_SANDBOX: ${{ inputs.sandbox }}
+        INPUT_SUBJECT: ${{ inputs.subject }}
+      run: |
+        set -euo pipefail
+        export PYTHONPATH="$GITHUB_ACTION_PATH/src"
+        out="$RUNNER_TEMP/receipts"
+        mkdir -p "$out"
+
+        if [[ "$INPUT_SANDBOX" != "docker" ]]; then
+          echo "::error::Only the docker sandbox is allowed in the Action."
+          exit 2
+        fi
+
+        args=(verify --repo "$INPUT_REPO" --sandbox docker --subject "$INPUT_SUBJECT"
+              --json-out "$out/verdict.json" --github-summary --github-output --color never)
+
+        case "$INPUT_MODE" in
+          pull_request)
+            args+=(--base-ref "$INPUT_BASE_REF" --head-ref "$INPUT_HEAD_REF" --kind fix)
+            ;;
+          issue)
+            if ! python3 -m receipts extract --body-file "$INPUT_BODY_FILE" --out "$out/receipt.toml"; then
+              echo "No receipt block in the issue; nothing to verify."
+              echo "skipped=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            args+=(--base-ref "$INPUT_BASE_REF" --receipt "$out/receipt.toml" --kind bug)
+            ;;
+          *)
+            echo "::error::mode must be pull_request or issue"
+            exit 2
+            ;;
+        esac
+
+        python3 -m receipts "${args[@]}"
+
+    - name: Upload verdict
+      if: ${{ inputs.upload == 'true' && steps.verify.outputs.skipped != 'true' }}
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: ${{ runner.temp }}/receipts/verdict.json
+        retention-days: 3
+        if-no-files-found: error

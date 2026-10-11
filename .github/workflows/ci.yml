@@ -1,0 +1,70 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: tests (${{ matrix.os }}, py${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Unit tests
+        run: python -m unittest discover -s tests -t . -v
+      - name: Benchmark (every case must behave as specified)
+        env:
+          PYTHONPATH: src
+        run: python -m receipts bench
+
+  docker-sandbox:
+    name: docker sandbox end-to-end
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Verified fix
+        env:
+          PYTHONPATH: src
+        run: python -m receipts verify --base-dir examples/average/base --head-dir examples/average/fix --sandbox docker --strict
+      - name: Reproduced bug
+        env:
+          PYTHONPATH: src
+        run: python -m receipts verify --base-dir examples/average/base --receipt examples/average/bug.toml --sandbox docker --strict
+      - name: A vacuous receipt must NOT pass
+        env:
+          PYTHONPATH: src
+        run: |
+          if python -m receipts verify --base-dir examples/average/base --head-dir examples/average/vacuous --sandbox docker --strict; then
+            echo "::error::a vacuous receipt was accepted"
+            exit 1
+          fi
+      - name: The sandbox has no network
+        run: |
+          out="$(docker run --rm --network none python:3.12-slim python -c "import socket; socket.create_connection(('1.1.1.1', 53), 3)" 2>&1 || true)"
+          echo "$out" | tail -n 2
+          echo "$out" | grep -Eq "unreachable|Errno|timed out" || { echo "::error::network was reachable"; exit 1; }

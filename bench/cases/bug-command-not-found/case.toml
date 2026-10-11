@@ -1,0 +1,4 @@
+description = "The command cannot be started at all."
+kind = "bug"
+expect = "invalid"
+meaningful = true

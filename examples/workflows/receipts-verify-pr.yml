@@ -1,0 +1,33 @@
+# Copy to .github/workflows/receipts-verify-pr.yml in YOUR repository.
+#
+# This is the UNPRIVILEGED half. It runs untrusted pull-request code, but only inside the
+# receipts sandbox, with a read-only token and no secrets. It never posts anything itself.
+name: receipts-verify-pr
+
+on:
+  pull_request:            # NOT pull_request_target: we want the restricted token
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: receipts-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 2              # the merge commit and its first parent (the base branch tip)
+          persist-credentials: false  # the token must not be readable by anything we run
+
+      - uses: SUTTIPATTESTER/receipts@v0.1.0   # pin to a commit SHA in production
+        with:
+          mode: pull_request
+          base-ref: HEAD^1            # base branch tip
+          head-ref: HEAD              # what the base branch would look like after merging
+          subject: pull_request:${{ github.event.pull_request.number }}

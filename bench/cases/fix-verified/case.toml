@@ -1,0 +1,4 @@
+description = "A real fix with a test that fails before and passes after."
+kind = "fix"
+expect = "verified"
+meaningful = true

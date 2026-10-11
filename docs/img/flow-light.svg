@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 440" width="1240" height="440" role="img" aria-labelledby="t d">
+<title id="t">How receipts works</title>
+<desc id="d">A receipt goes into a sandbox where it runs on the base tree (must fail) and the head tree (must pass), under a policy taken from the base branch. A deterministic verdict becomes a comment and a label.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#59636e"/></marker></defs>
+<rect x="0.5" y="0.5" width="1239" height="439" rx="16" fill="#ffffff" stroke="#d1d9e0"/>
+<rect x="30" y="130" width="200" height="176" rx="14" fill="#f6f8fa" stroke="#d1d9e0" stroke-width="1" />
+<g transform="translate(48,146) scale(1.0)" fill="none" stroke="#0969da" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h11l6 6v18H6z" fill="#0969da" fill-opacity="0.12"/><path d="M17 2v6h6M10 14h9M10 18h9M10 22h6"/></g>
+<text x="88" y="168" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#1f2328" text-anchor="start" xml:space="preserve" >The receipt</text>
+<text x="46" y="206" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#59636e" text-anchor="start" xml:space="preserve" >A tiny TOML file in</text>
+<text x="46" y="224" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#59636e" text-anchor="start" xml:space="preserve" >the issue or the PR</text>
+<text x="46" y="254" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="11.5" font-weight="400" fill="#1f2328" text-anchor="start" xml:space="preserve" >kind    = &quot;fix&quot;</text>
+<text x="46" y="272" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="11.5" font-weight="400" fill="#1f2328" text-anchor="start" xml:space="preserve" >command = &quot;pytest t.py&quot;</text>
+<text x="46" y="290" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="11.5" font-weight="400" fill="#1f2328" text-anchor="start" xml:space="preserve" >expect  = &quot;ZeroDivisionError&quot;</text>
+<line x1="232" y1="218" x2="282" y2="218" stroke="#59636e" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="346" y="14" width="410" height="42" rx="21" fill="#fbefff" stroke="#8250df" stroke-width="1" />
+<g transform="translate(366,26) scale(1.0)" fill="none" stroke="#8250df" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="12" height="9" rx="2" fill="#8250df" fill-opacity="0.15"/><path d="M6 8V5.5a3 3 0 0 1 6 0V8"/></g>
+<text x="394" y="40" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#8250df" text-anchor="start" xml:space="preserve" >policy.toml · read from the BASE branch, never the PR</text>
+<line x1="551" y1="57" x2="551" y2="86" stroke="#8250df" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="286" y="86" width="490" height="290" rx="18" fill="none" stroke="#59636e" stroke-width="2" stroke-dasharray="7 6" />
+<g transform="translate(306,100) scale(1.1111111111111112)" fill="none" stroke="#1f2328" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="12" height="9" rx="2" fill="#1f2328" fill-opacity="0.15"/><path d="M6 8V5.5a3 3 0 0 1 6 0V8"/></g>
+<text x="334" y="116" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="800" fill="#1f2328" text-anchor="start" xml:space="preserve" letter-spacing="2">SANDBOX</text>
+<rect x="310" y="138" width="210" height="108" rx="12" fill="#f6f8fa" stroke="#d1d9e0" stroke-width="1" />
+<text x="326" y="168" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1f2328" text-anchor="start" xml:space="preserve" >base tree</text>
+<text x="326" y="190" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#59636e" text-anchor="start" xml:space="preserve" >run the command</text>
+<rect x="326" y="204" width="98" height="26" rx="13.0" fill="#ffebe9" stroke="#cf222e" stroke-width="1" />
+<text x="375.0" y="221.375" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12.5" font-weight="600" fill="#cf222e" text-anchor="middle" xml:space="preserve" >must FAIL</text>
+<rect x="546" y="138" width="210" height="108" rx="12" fill="#f6f8fa" stroke="#d1d9e0" stroke-width="1" />
+<text x="562" y="168" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1f2328" text-anchor="start" xml:space="preserve" >head tree</text>
+<text x="562" y="190" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#59636e" text-anchor="start" xml:space="preserve" >run the command</text>
+<rect x="562" y="204" width="98" height="26" rx="13.0" fill="#dafbe1" stroke="#1a7f37" stroke-width="1" />
+<text x="611.0" y="221.375" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12.5" font-weight="600" fill="#1a7f37" text-anchor="middle" xml:space="preserve" >must PASS</text>
+<line x1="522" y1="192" x2="544" y2="192" stroke="#59636e" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="310" y="268" width="92" height="28" rx="14" fill="none" stroke="#d1d9e0" stroke-width="1" />
+<text x="356.0" y="287" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#59636e" text-anchor="middle" xml:space="preserve" >no network</text>
+<rect x="410" y="268" width="92" height="28" rx="14" fill="none" stroke="#d1d9e0" stroke-width="1" />
+<text x="456.0" y="287" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#59636e" text-anchor="middle" xml:space="preserve" >no secrets</text>
+<rect x="510" y="268" width="112" height="28" rx="14" fill="none" stroke="#d1d9e0" stroke-width="1" />
+<text x="566.0" y="287" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#59636e" text-anchor="middle" xml:space="preserve" >read-only root</text>
+<rect x="630" y="268" width="142" height="28" rx="14" fill="none" stroke="#d1d9e0" stroke-width="1" />
+<text x="701.0" y="287" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#59636e" text-anchor="middle" xml:space="preserve" >CPU/mem/time caps</text>
+<text x="310" y="330" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#59636e" text-anchor="start" xml:space="preserve" >throwaway export of each tree · no .git · symlinks dropped</text>
+<text x="310" y="350" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#59636e" text-anchor="start" xml:space="preserve" >(the receipt&#x27;s own files are copied onto base for the &#x27;before&#x27; run)</text>
+<line x1="778" y1="232" x2="830" y2="232" stroke="#59636e" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="832" y="96" width="172" height="280" rx="14" fill="#f6f8fa" stroke="#d1d9e0" stroke-width="1" />
+<text x="918" y="124" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#1f2328" text-anchor="middle" xml:space="preserve" >Verdict</text>
+<text x="918" y="142" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="middle" xml:space="preserve" >from exit codes only</text>
+<rect x="852" y="156" width="132" height="24" rx="12.0" fill="#dafbe1" stroke="#1a7f37" stroke-width="1" />
+<text x="918.0" y="172.2" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" font-weight="600" fill="#1a7f37" text-anchor="middle" xml:space="preserve" >verified</text>
+<rect x="852" y="186" width="132" height="24" rx="12.0" fill="#dafbe1" stroke="#1a7f37" stroke-width="1" />
+<text x="918.0" y="202.2" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" font-weight="600" fill="#1a7f37" text-anchor="middle" xml:space="preserve" >reproduced</text>
+<rect x="852" y="216" width="132" height="24" rx="12.0" fill="#fff8c5" stroke="#9a6700" stroke-width="1" />
+<text x="918.0" y="232.2" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" font-weight="600" fill="#9a6700" text-anchor="middle" xml:space="preserve" >vacuous</text>
+<rect x="852" y="246" width="132" height="24" rx="12.0" fill="#fff8c5" stroke="#9a6700" stroke-width="1" />
+<text x="918.0" y="262.2" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" font-weight="600" fill="#9a6700" text-anchor="middle" xml:space="preserve" >not-fixed</text>
+<rect x="852" y="276" width="132" height="24" rx="12.0" fill="#fff8c5" stroke="#9a6700" stroke-width="1" />
+<text x="918.0" y="292.2" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" font-weight="600" fill="#9a6700" text-anchor="middle" xml:space="preserve" >wrong-failure</text>
+<rect x="852" y="306" width="132" height="24" rx="12.0" fill="#ffebe9" stroke="#cf222e" stroke-width="1" />
+<text x="918.0" y="322.2" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" font-weight="600" fill="#cf222e" text-anchor="middle" xml:space="preserve" >invalid</text>
+<rect x="852" y="336" width="132" height="24" rx="12.0" fill="#fbefff" stroke="#8250df" stroke-width="1" />
+<text x="918.0" y="352.2" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" font-weight="600" fill="#8250df" text-anchor="middle" xml:space="preserve" >missing</text>
+<line x1="1006" y1="232" x2="1038" y2="232" stroke="#59636e" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="1040" y="130" width="170" height="176" rx="14" fill="#f6f8fa" stroke="#d1d9e0" stroke-width="1" />
+<text x="1056" y="158" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="15.5" font-weight="700" fill="#1f2328" text-anchor="start" xml:space="preserve" >Comment + label</text>
+<rect x="1056" y="174" width="128" height="24" rx="12.0" fill="#dafbe1" stroke="#1a7f37" stroke-width="1" />
+<text x="1120.0" y="190.025" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="11.5" font-weight="600" fill="#1a7f37" text-anchor="middle" xml:space="preserve" >receipt:verified</text>
+<circle cx="1070" cy="226" r="9" fill="#dafbe1" stroke="#1a7f37" stroke-width="1.6"/><path d="M1066.2 226.2 l2.9 3.1 l5.4 -5.9" fill="none" stroke="#1a7f37" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1086" y="231" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1f2328" text-anchor="start" xml:space="preserve" >Receipt verified</text>
+<text x="1056" y="256" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" font-weight="400" fill="#59636e" text-anchor="start" xml:space="preserve" >base  FAIL  ✓</text>
+<text x="1056" y="274" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" font-weight="400" fill="#59636e" text-anchor="start" xml:space="preserve" >head  PASS  ✓</text>
+<text x="130" y="408" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#59636e" text-anchor="middle" xml:space="preserve" >① attach</text>
+<text x="531" y="408" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#59636e" text-anchor="middle" xml:space="preserve" >② run twice</text>
+<text x="918" y="408" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#59636e" text-anchor="middle" xml:space="preserve" >③ decide</text>
+<text x="1125" y="408" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Noto Sans Thai', 'Leelawadee UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#59636e" text-anchor="middle" xml:space="preserve" >④ report</text>
+</svg>

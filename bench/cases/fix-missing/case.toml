@@ -1,0 +1,4 @@
+description = "A pull request without any receipt."
+kind = "fix"
+expect = "missing"
+meaningful = true

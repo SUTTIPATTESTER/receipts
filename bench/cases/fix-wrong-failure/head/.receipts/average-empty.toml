@@ -1,0 +1,11 @@
+version = 1
+kind = "fix"
+title = "average([]) returns 0.0 instead of crashing"
+closes = "#1"
+
+[run]
+command = "python tests/test_average_empty.py"
+overlay = ["tests/test_average_empty.py"]
+
+[expect]
+fail_output_contains = "ZeroDivisionError"

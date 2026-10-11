@@ -1,0 +1,15 @@
+version = 1
+kind = "fix"
+title = "average([]) is fixed"
+
+[run]
+command = "python check.py"
+
+[[file]]
+path = "check.py"
+content = """
+import sys
+sys.path.insert(0, "src")
+from mathx import VERSION
+assert VERSION == "2"
+"""

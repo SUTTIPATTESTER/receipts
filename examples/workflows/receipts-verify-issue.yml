@@ -1,0 +1,38 @@
+# Copy to .github/workflows/receipts-verify-issue.yml in YOUR repository.
+#
+# Verifies the ```toml receipt block of a bug report against the default branch.
+# Issues without a receipt block are ignored silently (no spam on questions or feature requests).
+name: receipts-verify-issue
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: receipts-issue-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    if: ${{ github.event.issue.pull_request == null }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false   # default branch
+
+      - name: Save the issue body
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}   # via env, never interpolated into the script
+        run: printf '%s' "$ISSUE_BODY" > "$RUNNER_TEMP/issue.md"
+
+      - uses: SUTTIPATTESTER/receipts@v0.1.0    # pin to a commit SHA in production
+        with:
+          mode: issue
+          base-ref: HEAD
+          body-file: ${{ runner.temp }}/issue.md
+          subject: issue:${{ github.event.issue.number }}

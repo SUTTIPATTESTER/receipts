@@ -1,0 +1,4 @@
+description = "Not even valid TOML."
+kind = "bug"
+expect = "invalid"
+meaningful = true

@@ -1,0 +1,4 @@
+description = "An embedded file targets .github/workflows."
+kind = "bug"
+expect = "invalid"
+meaningful = true

@@ -1,0 +1,9 @@
+version = 1
+kind = "bug"
+title = "fake"
+
+[run]
+command = "python -c \"print('ZeroDivisionError'); raise SystemExit(1)\""
+
+[expect]
+fail_output_contains = "ZeroDivisionError"

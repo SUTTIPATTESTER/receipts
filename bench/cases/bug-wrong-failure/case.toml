@@ -1,0 +1,4 @@
+description = "The repro fails with a SyntaxError, not the reported bug."
+kind = "bug"
+expect = "wrong-failure"
+meaningful = true

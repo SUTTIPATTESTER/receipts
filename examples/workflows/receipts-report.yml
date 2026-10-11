@@ -1,0 +1,27 @@
+# Copy to .github/workflows/receipts-report.yml in YOUR repository.
+#
+# This is the PRIVILEGED half. It holds the write token, so it NEVER checks out or runs
+# pull-request code. It only validates a data artifact and posts a comment and a label.
+name: receipts-report
+
+on:
+  workflow_run:
+    workflows: [receipts-verify-pr, receipts-verify-issue]
+    types: [completed]
+
+permissions:
+  actions: read          # download the artifact from the verify run
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  report:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: SUTTIPATTESTER/receipts/report@v0.1.0   # pin to a commit SHA in production
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}

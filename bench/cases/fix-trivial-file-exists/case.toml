@@ -1,0 +1,4 @@
+description = "KNOWN LIMITATION: the receipt only checks that a file exists."
+kind = "fix"
+expect = "verified"
+meaningful = false

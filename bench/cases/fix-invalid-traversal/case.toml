@@ -1,0 +1,4 @@
+description = "run.overlay tries to escape the repository."
+kind = "fix"
+expect = "invalid"
+meaningful = true

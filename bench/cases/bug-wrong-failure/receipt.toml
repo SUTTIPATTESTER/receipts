@@ -1,0 +1,18 @@
+version = 1
+kind = "bug"
+title = "average([]) raises ZeroDivisionError"
+
+[run]
+command = "python repro.py"
+
+[expect]
+fail_output_contains = "ZeroDivisionError"
+
+[[file]]
+path = "repro.py"
+content = """
+import sys
+sys.path.insert(0, "src")
+from mathx import average
+print(average([)
+"""

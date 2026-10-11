@@ -1,0 +1,4 @@
+description = "KNOWN LIMITATION: the receipt measures an unrelated change."
+kind = "fix"
+expect = "verified"
+meaningful = false

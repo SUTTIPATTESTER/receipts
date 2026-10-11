@@ -1,0 +1,4 @@
+description = "A runnable report that fails on main exactly as described."
+kind = "bug"
+expect = "reproduced"
+meaningful = true

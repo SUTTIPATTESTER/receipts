@@ -1,0 +1,3 @@
+# mathx
+
+Tiny maths helpers.

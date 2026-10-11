@@ -1,0 +1,5 @@
+# Byte-for-byte identical checkouts on every OS: receipts compares file contents,
+# and shell/TOML fixtures must not be rewritten to CRLF.
+* text=auto eol=lf
+*.svg text eol=lf
+*.png binary

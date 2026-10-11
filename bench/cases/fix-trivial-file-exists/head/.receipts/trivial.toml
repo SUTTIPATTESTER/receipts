@@ -1,0 +1,13 @@
+version = 1
+kind = "fix"
+title = "average([]) is fixed"
+
+[run]
+command = "python check.py"
+
+[[file]]
+path = "check.py"
+content = """
+import os, sys
+sys.exit(0 if os.path.exists("FIXED.txt") else 1)
+"""

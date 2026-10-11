@@ -1,0 +1,15 @@
+# .receipts/policy.toml: maintainers' rules. Always read from the BASE branch.
+# A pull request cannot change the limits that apply to itself.
+
+image         = "python:3.12-slim"   # prebuilt image with your dependencies is the safest choice
+max_timeout   = 120                  # seconds, upper bound for any receipt
+memory        = "512m"
+cpus          = "1"
+pids          = 256
+
+# Optional: runs once per tree WITH network access, before the receipt (no secrets in this environment).
+# Prefer a prebuilt image; if you must install, use lockfile-only installs with scripts disabled.
+# setup = "pip install --require-hashes -r requirements.txt"
+
+# Shown as a link in the bot comment (https only).
+# docs_url = "https://github.com/OWNER/REPO/blob/main/CONTRIBUTING.md"

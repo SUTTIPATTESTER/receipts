@@ -1,0 +1,4 @@
+description = "Fails on base with a typo (ImportError), not the promised failure."
+kind = "fix"
+expect = "wrong-failure"
+meaningful = true

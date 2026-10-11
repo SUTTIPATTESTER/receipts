@@ -1,0 +1,9 @@
+version = 1
+kind = "bug"
+title = "ghost"
+
+[run]
+command = "receipts-no-such-binary-xyz"
+
+[expect]
+fail_output_contains = "not found"

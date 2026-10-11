@@ -1,0 +1,4 @@
+description = "The test already passes on the base tree, so it proves nothing."
+kind = "fix"
+expect = "vacuous"
+meaningful = true

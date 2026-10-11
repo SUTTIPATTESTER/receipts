@@ -1,0 +1,7 @@
+version = 1
+kind = "fix"
+title = "sleeps"
+
+[run]
+command = "python -c \"import time; time.sleep(60)\""
+timeout = 1

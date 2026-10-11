@@ -1,0 +1,4 @@
+description = "The repro succeeds on main, so there is no bug to see."
+kind = "bug"
+expect = "unreproducible"
+meaningful = true

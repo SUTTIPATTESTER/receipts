@@ -1,0 +1,4 @@
+description = "The test fails before, but the change does not fix it."
+kind = "fix"
+expect = "not-fixed"
+meaningful = true

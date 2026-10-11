@@ -1,0 +1,4 @@
+description = "The command sleeps past the timeout."
+kind = "fix"
+expect = "timeout"
+meaningful = true

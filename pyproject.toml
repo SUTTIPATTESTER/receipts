@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "receipts"
+version = "0.1.0"
+description = "Verify bug reports and pull requests by running them. Every claim comes with a receipt."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+keywords = ["open-source", "maintainers", "github-actions", "triage", "ai-slop", "sandbox"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = []  # standard library only, on purpose: nothing to audit, nothing to install in CI
+
+[project.scripts]
+receipts = "receipts.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
